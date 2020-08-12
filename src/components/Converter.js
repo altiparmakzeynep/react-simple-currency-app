@@ -21,6 +21,8 @@ class Converter extends Component{
     debugger;
 
     componentDidMount(){
+      
+
         axios.get('http://data.fixer.io/api/latest?access_key=964e769489a77bf7c93e5b48288fe05d&symbols=EUR,TRY,CAD,JPY,USD').then(response=> {
             console.log(response);
             const rates = response.data.rates;
@@ -36,13 +38,14 @@ class Converter extends Component{
         return(
             <View style={styles.converter}>
               <TextInput style={styles.input} placeholder="Enter EUR Value"
-                         onChange={(text) =>{
+                         onChangeText={(text) =>{
                             // keyboardType='numeric';
                             const money = parseFloat(text);
-
+                          
                              this.setState({
                                  input:text,
-                                 tl: (money*this.state.rates['TRY']),
+                            
+                                 tl: (money*(this.state.rates['TRY'])),
                                  usd: (money*this.state.rates['USD']),
                                  cad: (money*this.state.rates['CAD']),
                                  jpy: (money*this.state.rates['JPY']),
@@ -50,7 +53,7 @@ class Converter extends Component{
                              })
 
                          }}
-                         value={this.state.input}
+                        //  value={this.state.input}
               ></TextInput>
               <Text style={styles.textStyle}>TRY: {this.state.tl}</Text>
               <Text style={styles.textStyle}>USD: {this.state.usd}</Text>
